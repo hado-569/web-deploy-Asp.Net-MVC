@@ -1,0 +1,117 @@
+﻿@model Store.Models.EF.Product
+
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Store.Models.EF.ProductCategory)ViewBag.Category;
+    var relatedprodcut = (List<Store.Models.EF.Product>)ViewBag.RelatedProduct;
+}
+
+<div class="wrap">
+    <ul class="breadcrumb breadcrumb__t"><a class="home" href="/">Trang Chủ</a>/ @Model.Name</ul>
+    <div class="cont span_2_of_3">
+        <div class="grid images_3_of_2">
+            <ul id="etalage">
+                <li>
+                    <a >
+                        <img class="etalage_thumb_image img-responsive" src="@Model.Images"  />
+                        @*<img class="etalage_source_image" src="@Model.Images" class="img-responsive" title="" />*@
+                    </a>
+                </li>
+                @*<li>
+                        <img class="etalage_thumb_image" src="images/s-img1.jpg" class="img-responsive" />
+                        <img class="etalage_source_image" src="images/s2.jpg" class="img-responsive" title="" />
+                    </li>
+                    <li>
+                        <img class="etalage_thumb_image" src="images/s-img2.jpg" class="img-responsive" />
+                        <img class="etalage_source_image" src="images/s3.jpg" class="img-responsive" />
+                    </li>
+                    <li>
+                        <img class="etalage_thumb_image" src="images/s4.jpg" class="img-responsive" />
+                        <img class="etalage_source_image" src="images/s-img3.jpg" class="img-responsive" />
+                    </li>*@
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="desc1 span_3_of_2">
+            <h3 class="m_3">@Model.Name</h3>
+            <p class="m_5">@(Model.PromotionPrice.HasValue ? Model.PromotionPrice.Value.ToString("N0") : Model.Price.Value.ToString("N0"))<<<span class="reducedfrom">@(Model.Price.HasValue ? @Model.Price.Value.ToString("N0") : "Liên hệ")</span></p>
+            
+                   <div class="btn_form"><a class="btn btn-light" href="/them-gio-hang?producID=@Model.ID&quantity=1">Mua Hàng</a></div>              
+            
+            <span class="m_link"><a href="#">login to save in wishlist</a> </span>
+            <p class="m_text2">@Model.Description</p>
+        </div>
+        <div class="clear"></div>
+        <div class="clients">
+            <h3 class="m_3">5 Sản Phẩm Khác Tương Tự Trong Danh Mục</h3>
+            <ul id="flexiselDemo3">
+                @foreach (var item in relatedprodcut)
+                {
+                    var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+                    <li><img src="@item.Images" /><a href="@url">@item.Name</a><p>@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : item.Price.Value.ToString("N0"))<<<span class="reducedfrom">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span></p></li>
+                }
+
+
+            </ul>
+            <script type="text/javascript">
+                $(window).load(function () {
+                    $("#flexiselDemo1").flexisel();
+                    $("#flexiselDemo2").flexisel({
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 1
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 2
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
+                            }
+                        }
+                    });
+
+                    $("#flexiselDemo3").flexisel({
+                        visibleItems: 5,
+                        animationSpeed: 1000,
+                        autoPlay: false,
+                        autoPlaySpeed: 3000,
+                        pauseOnHover: true,
+                        enableResponsiveBreakpoints: true,
+                        responsiveBreakpoints: {
+                            portrait: {
+                                changePoint: 480,
+                                visibleItems: 1
+                            },
+                            landscape: {
+                                changePoint: 640,
+                                visibleItems: 2
+                            },
+                            tablet: {
+                                changePoint: 768,
+                                visibleItems: 3
+                            }
+                        }
+                    });
+
+                });
+            </script>
+            <script type="text/javascript" src="~/assests/client/js/jquery.flexisel.js"></script>
+        </div>
+        <div class="toogle">
+            <h3 class="m_3">Chi Tiết Sản Phẩm</h3>
+            <p class="m_text">@Html.Raw(Model.Detail)</p>
+        </div>
+    </div>
+
+    @{Html.RenderAction("ProductCategory", "Product");}
+
+    <div class="clear"></div>
+</div>
+<div class="clear"></div>
+

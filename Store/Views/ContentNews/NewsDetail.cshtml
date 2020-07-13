@@ -1,0 +1,36 @@
+﻿@model Store.Models.EF.Content
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cateNews = (Store.Models.EF.Category)ViewBag.CategoryN;
+
+}
+
+<div class="main">
+    <div class="wrap">
+        <div class="section group">
+            <ul class="breadcrumb breadcrumb__t"><shadow>Trang Chủ/ </shadow><shadow>@cateNews.Name</shadow>/ @Model.Name</ul>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-8">
+
+                    <h2 class="header-a">@Model.Name</h2>
+                    <h5 >@Model.CreatedBy:<span>@Model.CreatedDate</span></h5>
+                    <img src="@Model.Images" />
+                    <div class="content">
+                        @Html.Raw(Model.Detail)
+                    </div>
+
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="row">
+                        @{Html.RenderAction("CategoryofNews", "ContentNews"); }
+                    </div>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+

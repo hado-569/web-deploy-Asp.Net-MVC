@@ -1,0 +1,11 @@
+﻿@model  List<Store.Models.EF.Menu>
+
+
+<div class="menu">
+    <ul class="megamenu skyblue">
+           @foreach (var item in Model)
+            {
+                <li class="active grid"><a href="@item.Link" target="@item.Target">@item.Text</a></li>
+            }
+    </ul>
+</div>

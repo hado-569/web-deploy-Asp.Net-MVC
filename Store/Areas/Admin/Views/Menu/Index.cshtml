@@ -1,0 +1,96 @@
+﻿@model PagedList.IPagedList<Store.Models.EF.Menu>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    Danh sách Menu !
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @using (Html.BeginForm("Index", "Menu", FormMethod.Get))
+                    {
+
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control " placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" value="@ViewBag.SearchString">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                                <a class="btn btn-primary" href="/Admin/Menu/Create"> Thêm mới </a>
+                            </div>
+                        </div>
+
+                    }
+                    <hr class="sidebar-divider">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                        <thead>
+                            <tr>
+                                <th>Text</th>
+                                <th>Link</th>
+                                <th>Display Oder</th>
+                                <th>Target</th>
+                                <th>TypeID</th>
+
+                                <th>#</th>
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Text</th>
+                                <th>Link</th>
+                                <th>Display Oder</th>
+                                <th>Target</th>
+                                <th>TypeID</th>
+
+                                <th>#</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID">
+
+                                    <td>@item.Text</td>
+                                    <td>@item.Link</td>
+                                    <td>@item.DisplayOrder</td>
+                                    <td>@item.Target</td>
+                                    <td>@item.TypeID</td>
+
+
+                                    <td>
+                                        <a href="/Admin/Menu/Edit/@item.ID">Sửa</a>
+
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                        {
+                                       Confirm = "Bạn có chắc muốn xóa không ?",
+                                       OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                       HttpMethod = "Delete"
+
+                                   })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+
+                </div>
+                <ul class="pagination">
+                    <li class="paginate_button page-item active">
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

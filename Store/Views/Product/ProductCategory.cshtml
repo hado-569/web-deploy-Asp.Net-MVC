@@ -1,0 +1,14 @@
+﻿@model List<Store.Models.EF.ProductCategory>
+
+    <div class="rsingle span_1_of_single">
+        <h5 class="m_1">Danh Mục Sản Phẩm</h5>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                 <a href="/san-pham/@item.Metatitle-@item.ID" class="list-group-item list-group-item-light" >@item.Name</a>
+            }
+        </ul>
+           
+
+    </div>
+

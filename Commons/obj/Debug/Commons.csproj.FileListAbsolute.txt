@@ -1,0 +1,7 @@
+D:\Code C++,C#\code C#\Store\Commons\obj\Debug\Commons.csproj.CoreCompileInputs.cache
+D:\Code C++,C#\code C#\Store\Commons\bin\Debug\Commons.exe.config
+D:\Code C++,C#\code C#\Store\Commons\bin\Debug\Commons.exe
+D:\Code C++,C#\code C#\Store\Commons\bin\Debug\Commons.pdb
+D:\Code C++,C#\code C#\Store\Commons\obj\Debug\Commons.exe
+D:\Code C++,C#\code C#\Store\Commons\obj\Debug\Commons.pdb
+D:\Code C++,C#\code C#\Store\Commons\obj\Debug\Commons.csprojAssemblyReference.cache

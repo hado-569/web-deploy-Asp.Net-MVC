@@ -1,0 +1,119 @@
+﻿@model List <Store.Models.EF.Product>
+
+
+@{
+    ViewBag.Title = "Toàn Bộ sản phẩm đang mở bán ! ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listnewproduct = (List<Store.Models.EF.Product>)ViewBag.ListnewProduct;
+}
+
+    
+    <div class="main">
+        <div class="wrap">
+            <div class="section group">
+                <div class="cont span_2_of_3">
+                    <h2 class="head">Toàn Bộ sản phẩm đang mở bán !</h2>
+
+
+                    @foreach (var item in Model)
+                    {
+
+                        if (item.PromotionPrice.HasValue)
+                        {
+                            var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+                            <div class="col_1_of_3 span_1_of_3 ">
+                                <a href="@url">
+                                    <div class="inner_content clearfix">
+                                        <div class="product_image">
+                                            <img src="@item.Images" alt="@item.Name">
+                                        </div>
+                                        <div class="sale-box1"><span class="on_sale title_shop">Sale</span></div>
+                                        <div class="price">
+                                            <div class="cart-left">
+                                                <p class="title">@item.Name</p>
+                                                <div class="price1">
+                                                    <span class="reducedfrom">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                    <span class="actual">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : item.Price.Value.ToString("N0"))</span>
+                                                </div>
+                                            </div>
+                                            <div class="cart-right"> </div>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
+
+                        }
+                        else if (item.CreatedDate.Equals(DateTime.Now) )
+                        {
+                            foreach (var itemnew in listnewproduct)
+                            {
+                                var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+                                <div class="col_1_of_3 span_1_of_3 ">
+                                    <a href="@url">
+                                        <div class="inner_content clearfix">
+                                            <div class="product_image">
+                                                <img src="@item.Images" alt="@item.Name">
+                                            </div>
+                                            <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                                            <div class="price">
+                                                <div class="cart-left">
+                                                    <p class="title">@item.Name</p>
+                                                    <div class="price1">
+
+                                                        <span class="actual">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                    </div>
+                                                </div>
+                                                <div class="cart-right"> </div>
+                                                <div class="clear"></div>
+                                            </div>
+
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+                            <div class="col_1_of_3 span_1_of_3 ">
+                                <a href="@url">
+                                    <div class="inner_content clearfix">
+                                        <div class="product_image">
+                                            <img src="@item.Images" alt="@item.Name">
+                                        </div>
+                                        
+                                        <div class="price">
+                                            <div class="cart-left">
+                                                <p class="title">@item.Name</p>
+                                                <div class="price1">
+
+                                                    <span class="actual">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                </div>
+                                            </div>
+                                            <div class="cart-right"> </div>
+                                            <div class="clear"></div>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
+                        }
+
+
+
+                    }
+
+
+                </div>
+
+                @{Html.RenderAction("ProductCategory", "Product");}
+
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+

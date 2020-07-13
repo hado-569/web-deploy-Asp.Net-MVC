@@ -1,0 +1,38 @@
+﻿@model List<Store.Models.CartItem>
+
+
+@section jsFooter{
+
+
+    <script src="~/assests/client/js/baseController.js"></script>
+
+}
+
+<div class="header-bottom-right">
+    <div class="search">
+        <form action="/tim-kiem" method="get">
+            <input type="text" name="keyword" id="txtKeyword" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+            <input type="submit" value="Subscribe" id="submit" name="submit">
+            <div id="response"> </div>
+        </form>
+       
+    </div>
+    <div class="tag-list">  
+        <ul class="icon1 sub-icon1 profile_img">
+            <li>
+                <a class="active-icon c2" href="/gio-hang"> </a>
+                <ul class="sub-icon1 list">
+                    <li>@if (Model.Count < 0)
+                    {
+                        <h3>Chưa Có Sản Phẩm Nào Cả </h3>
+                    }
+                    else {
+                        <h3>Đã Có : @Model.Count sản phẩm </h3>
+                    }<a href=""></a></li>
+                    <li><p>Sẵn sàng phục vụ quý khách <a href="/about-us">Contact us now ! </a></p></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="last"><li><a href="/gio-hang">Giỏ hàng : @Model.Count </a></li></ul>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var slides = (List<Store.Models.EF.Slide>)ViewBag.Slides;
+    var listnewProduct = (List<Store.Models.EF.Product>)ViewBag.NewProduct;
+    var listfeatureProduct = (List<Store.Models.EF.Product>)ViewBag.FeatureProduct;
+}
+
+@section slide{
+
+    <!-- start slider -->
+    <div id="fwslider">
+        <div class="slider_container">
+
+
+            @foreach (var item in slides)
+            {
+                <div class="slide">
+                    <!-- Slide image -->
+                    <img src="@item.Image" alt="" />
+                    <!-- /Slide image -->
+                    <!-- Texts container -->
+                    <div class="slide_content">
+                        <div class="slide_content_wrap">
+                            <!-- Text title -->
+                            <h4 class="title">HaDo Store </h4>
+                            <!-- /Text title -->
+                            <!-- Text description -->
+                            <p class="description">Mua Hàng Khỏi Cần Lo ! </p>
+                            <!-- /Text description -->
+                        </div>
+                    </div>
+                    <!-- /Texts container -->
+                </div>
+                <!-- /Duplicate to create more slides -->
+            }
+            <!--/slide -->
+        </div>
+        <div class="timers"></div>
+        <div class="slidePrev"><span></span></div>
+        <div class="slideNext"><span></span></div>
+    </div>
+    <!--/slider -->
+
+}
+
+
+<div class="main">
+    <div class="wrap">
+        <div class="section group">
+            <div class="cont span_2_of_3">
+                <h2 class="head">Sản Phẩm Đang Giảm Giá</h2>
+                <div class="top-box">
+                    @foreach (var item in listfeatureProduct)
+                    {
+                        var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+                        <div class="col_1_of_3 span_1_of_3 ">
+                            <a href="@url">
+                                <div class="inner_content clearfix">
+                                    <div class="product_image">
+                                        <img src="@item.Images" alt="@item.Name">
+                                    </div>
+                                    <div class="sale-box1"><span class="on_sale title_shop">Sale</span></div>
+                                    <div class="price">
+                                        <div class="cart-left">
+                                            <p class="title">@item.Name</p>
+                                            <div class="price1">
+                                                <span class="reducedfrom">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên hệ")</span>
+                                                <span class="actual">@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") : item.Price.Value.ToString("N0"))</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-right"> </div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+                    <div class="clear" ></div>
+                </div>
+               
+               
+
+                <h2 class="head">Sản Phẩm Mới</h2>
+                <div class="section group">
+                    @foreach (var item in listnewProduct)
+                    {
+                        var url = "/chi-tiet/" + item.Metatile + "-" + item.ID;
+
+                        <div class="col_1_of_3 span_1_of_3">
+                            <a href="@url">
+                                <div class="inner_content clearfix">
+                                    <div class="product_image">
+                                        <img src="@item.Images" alt="@item.Name" />
+                                    </div>
+                                    <div class="sale-box"><span class="on_sale title_shop">Mới</span></div>
+                                    <div class="price">
+                                        <div class="cart-left">
+                                            <p class="title">@item.Name</p>
+                                            <div class="price1">
+                                                <span class="actual">@(item.Price.HasValue ? item.Price.Value.ToString("N0") : "Liên Hệ")</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart-right"></div>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+                    <div class="clear"></div>
+                </div>
+
+
+
+
+
+            </div>
+            <div class="rsidebar span_1_of_left">
+                <div class="top-border"> </div>
+                <div class="border">
+                    <link href="~/assests/client/css/default.css" rel="stylesheet" type="text/css" media="all" />
+                    <link href="~/assests/client/css/nivo-slider.css" rel="stylesheet" type="text/css" media="all" />
+                    <script src="~/assests/client/js/jquery.nivo.slider.js"></script>
+                    <script type="text/javascript">
+                        $(window).load(function () {
+                            $('#slider').nivoSlider();
+                        });
+                    </script>
+                    <div class="slider-wrapper theme-default">
+                        <div id="slider" class="nivoSlider">
+                            <img src="~/assests/client/images/lessin1.jpg" alt="" />
+                            <img src="~/assests/client/images/lessin2.jpg" alt="" />
+                            <img src="~/assests/client/images/lessin3.jpg" alt="" />
+                        </div>
+                    </div>
+                    <div class=" btn-light"><a href="/san-pham">Check it Out</a></div>
+                </div>
+                <div class="top-border"> </div>
+                <div class="sidebar-bottom">
+                
+                </div>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+
